@@ -1,0 +1,45 @@
+import java.util.HashMap;
+import java.util.Map;
+public class Solution {
+    public static int[] getFrequencies(int []v) {
+        // Write Your Code Here
+
+         HashMap<Integer, Integer> frequencyMap = new HashMap<>();
+        
+        // Step 2: Count the frequency of each element
+        for (int num : v) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Step 3: Find the highest and lowest frequency
+        int highestFrequency = Integer.MIN_VALUE;
+        int lowestFrequency = Integer.MAX_VALUE;
+
+        for (int freq : frequencyMap.values()) {
+            if (freq > 0) {
+                highestFrequency = Math.max(highestFrequency, freq);
+                lowestFrequency = Math.min(lowestFrequency, freq);
+            }
+        }
+
+        // Step 4: Find the smallest element with the highest and lowest frequency
+        int highestElement = Integer.MAX_VALUE;
+        int lowestElement = Integer.MAX_VALUE;
+
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+            int num = entry.getKey();
+            int freq = entry.getValue();
+
+            if (freq == highestFrequency) {
+                highestElement = Math.min(highestElement, num);
+            }
+
+            if (freq == lowestFrequency) {
+                lowestElement = Math.min(lowestElement, num);
+            }
+        }
+
+        // Return the results
+        return new int[]{highestElement, lowestElement};
+    }
+}
