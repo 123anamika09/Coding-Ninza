@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Solution {
+    public static ArrayList<ArrayList<Integer>> zeroMatrix(ArrayList<ArrayList<Integer>> matrix, Integer n, Integer m) {
+        // Step 1: Create arrays to track rows and columns that need to be zeroed
+        boolean[] rowFlags = new boolean[n];
+        boolean[] colFlags = new boolean[m];
+
+        // Step 2: Mark rows and columns to be zeroed
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix.get(i).get(j) == 0) {
+                    rowFlags[i] = true;
+                    colFlags[j] = true;
+                }
+            }
+        }
+
+        // Step 3: Update the matrix based on the flags
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (rowFlags[i] || colFlags[j]) {
+                    matrix.get(i).set(j, 0);
+                }
+            }
+        }
+
+        return matrix;
+    }
+}
